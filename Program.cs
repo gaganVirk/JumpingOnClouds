@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,25 +11,30 @@ namespace JumpingOnCloudsAlgorithm
     {
         static int JumpingOnClouds(int[] c)
         {
-            int counter = 0;
+            int counter = -1;
 
-            for(int i = 0; i < c.Length; i++)
+            for(int i = 0; i < c.Length; i++, counter++)
             {
-                if(c[i] == 0)
+                Console.WriteLine("First {0}",i);
+                if(i < c.Length - 2 && c[i + 2] == 0)
                 {
-                    counter++;
+                    i++;
+                  //  Console.WriteLine("Second: {0}",i);
                 }
             }
             return counter;
         }
         static void Main(string[] args)
         {
+            StreamReader reader = new StreamReader("testTwo.txt");
+            Console.SetIn(reader);
             int n = Convert.ToInt32(Console.ReadLine());
 
             int[] c = Array.ConvertAll(Console.ReadLine().Split(' '), cTemp => Convert.ToInt32(cTemp));
             int result = JumpingOnClouds(c);
 
             Console.WriteLine(result);
+            Console.ReadLine();
         }
     }
 }
